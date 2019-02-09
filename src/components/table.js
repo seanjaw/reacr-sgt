@@ -26,8 +26,7 @@ class Table extends Component {
             return <StudentRow key ={student.id} student={student}/>
         });
         return (
-            <div className="row">
-                <div className='col s12 m8'>
+
                     <table>
                         <thead>
                             <tr>
@@ -40,9 +39,6 @@ class Table extends Component {
                             {studentRows}
                         </tbody>
                     </table>
-                </div>
-
-            </div>
 
         );
     }
