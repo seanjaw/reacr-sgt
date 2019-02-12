@@ -3,6 +3,7 @@ import 'materialize-css/dist/js/materialize.min';
 import '../assets/css/app.scss';
 import AddStudent from './add_student';
 import React, { Component } from 'react';
+import axios from 'axios';
 import Table from './table';
 import studentData from '../data/get_all_students';
 import {randomString} from '../helpers';
@@ -39,10 +40,13 @@ class App extends Component {
     }
     getStudentData() {
         //Call server to get student data
-
-        this.setState({
-            students: studentData
+        axios.get('http://localhost/server/getstudentlist.php').then((response)=>{
+            console.log('Server Reponse:', response.data.data);
+            this.setState({
+                students: response.data.data
+            });
         });
+       
     }
     render() {
         return (
