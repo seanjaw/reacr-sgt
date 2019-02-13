@@ -21,35 +21,51 @@ class App extends Component {
         const formattedStudent = formatPostData(student);
         // console.log('Add Student:', formattedStudent);
   
-      const response = await axios.post('http://localhost/server/createstudent.php', formattedStudent);
-      console.log ('addstudent with response', response)
+      await axios.post('/server/createstudent.php', formattedStudent);
+
+      this.getStudentData();
+    //   console.log ('addstudent with response', response)
         
     }
 
-    deleteStudent = (id)=>{
-        const indexToDelete = this.state.students.findIndex((student)=>{
-            return student.id === id;
-        });
-        if (indexToDelete >= 0){
-            const tempStudents = this.state.students.slice();
-            tempStudents.splice(indexToDelete,1);
-            this.setState({
-                students: tempStudents
-            });
-        }
+    deleteStudent = async (id)=>{
+
+        const formattedId = formatPostData({id: id});
+        await axios.post('/server/deletestudent.php', formattedId);
+        // const indexToDelete = this.state.students.findIndex((student)=>{
+        //     return student.id === id;
+        // });
+        // if (indexToDelete >= 0){
+        //     const tempStudents = this.state.students.slice();
+        //     tempStudents.splice(indexToDelete,1);
+        //     this.setState({
+        //         students: tempStudents
+        //     });
+
+
+        // }
+        this.getStudentData();
 
         
     }
     async getStudentData() {
-        const response = await axios.get('http://localhost/server/getstudentlist.php');
+        const response = await axios.get('/server/getstudentlist.php');
 
         console.log('get list response:' ,response)
+        this.setState({
+            students: response.data.data || []
+        })
+        // if (response.data.success){
+        //     this.setState({
+        //         students: response.data.data
+        //     })
+        // }
+        // else{
+        //     this.setState({
 
-        if (response.data.success){
-            this.setState({
-                students: response.data.data
-            })
-        }
+        //         students: [] 
+        //     })
+        // }
        
         //Call server to get student data
         // axios.get('http://localhost/server/getstudentlist.php').then((response)=>{
