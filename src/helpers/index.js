@@ -6,6 +6,16 @@ export function randomString(length = 8){
         output += characters[randomIndex];
 
     }
-
     return output;
+}
+
+export function formatPostData(data){
+    const urlParams = new URLSearchParams();
+
+    for(let [key,value] of Object.entries(data)){
+        urlParams.append(key,value);
+    }
+
+    return urlParams;
+    
 }
