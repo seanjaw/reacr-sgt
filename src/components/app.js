@@ -3,7 +3,7 @@ import 'materialize-css/dist/js/materialize.min';
 import '../assets/css/app.scss';
 import AddStudent from './add_student';
 import React, { Component } from 'react';
-import {Route} from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import Table from './table';
 import ViewStudent from './view_student';
 
@@ -11,18 +11,17 @@ import ViewStudent from './view_student';
 
 
 class App extends Component {
-    
 
-  
+   
 
-    
-    
+
+
     render() {
         return (
             <div className="container">
-                <Route exact path="/" component={Table}/>
-                <Route path="/add-student" component ={AddStudent}/> 
-                <Route path ="/student/:id" component ={ViewStudent}/>
+                <Route exact path="/" component={Table} />
+                <Route path="/add-student" component={AddStudent} />
+                <Route path="/student/:id" component={ViewStudent} />
                 {/* <h1 className='center'>SGT</h1>
                 <Table/> */}
                 {/* <div className="row">

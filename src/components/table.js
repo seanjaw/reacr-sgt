@@ -7,15 +7,16 @@ import {Link} from 'react-router-dom';
 class Table extends Component {
     state = {
         students: []
+        // students:null
     }
     componentDidMount() {
         this.getStudentData();
+        //do set timeout 
     }
 
     async getStudentData() {
         const response = await axios.get('/server/getstudentlist.php');
 
-        console.log('get list response:' ,response)
         this.setState({
             students: response.data.data || []
         })
@@ -69,6 +70,16 @@ class Table extends Component {
                 return <StudentRow delete={this.deleteStudent} key={student.id} student={student} />
             });
         }
+
+        // else if(students === null){
+        //     studentRows.push(
+        //         <tr key="no-data">
+        //         <td colSpan="4">
+        //             <h4 className="center grey-text">Student Data Loading</h4>
+        //         </td>
+        //     </tr>
+        //     )
+        // }
         else {
             studentRows.push(
                 <tr key="no-data">
